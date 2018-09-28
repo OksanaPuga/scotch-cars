@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack -d --watch",
-    "serve": "serve ./public"
+    "start": "node index.js"
   },
   "author": "Oksana Kh",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
+    "express": "^4.16.3",
     "serve": "^10.0.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1"
