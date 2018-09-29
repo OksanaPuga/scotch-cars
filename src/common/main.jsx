@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 
 import Home from './home.jsx';
 import About from './about.jsx';
 import Car from '../car/car.jsx';
-
+import CarDetails from '../car/carDetails.jsx';
+import carsData from '../../mocks.js';
 
 class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cars: []
+        };
+    }
+
+    componentDidMount() {
+        this.setState({ cars: carsData });
+    }
+
     render() {
         return (
             <div>
@@ -17,8 +29,9 @@ class Main extends Component {
                         </div>
                         <div className='collapse navbar-collapse' id='bs-example-navbar-collapse1'>
                             <ul className='nav navbar-nav'>
-                                <li className='active'><a href='#'>Link <span className='sr-only'>current</span></a></li>
-                                <li><a href='#'>Link</a></li>
+                                <li><NavLink exact to='/' activeClassName='active'>Home</NavLink></li>
+                                <li><NavLink exact to='/car' activeClassName='active'>Cars</NavLink></li>
+                                <li><NavLink exact to='/about' activeClassName='active'>About</NavLink></li>
                             </ul>
                         </div>
                     </div>
@@ -27,7 +40,8 @@ class Main extends Component {
                 <div className='container'>
                     <Route path='/' exact component={Home} />
                     <Route path='/about' component={About} />
-                    <Route path='/car' component={Car} />
+                    <Route path='/car' exact render={(props) => (<Car {...props} data={this.state.cars} />)} />
+                    <Route path='/car/:id' render={(props) => (<CarDetails {...props} data={this.state.cars} />)} />
                 </div>
             </div>
         );

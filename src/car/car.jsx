@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
-import carsData from '../../mocks.js';
+import { Link } from 'react-router-dom';
 
 class Car extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cars: []
-        };
-    }
-
-    componentDidMount() {
-        this.setState({ cars: carsData });
-    }
-
     render() {
-        let cars = this.state.cars.map((car) => (
-            <a
+        let cars = this.props.data.map((car) => (
+            <Link
                 className='list-group-item'
-                href='#'
+                to={'/car/' + car.id}
                 key={car.id}>
                 {car.name}
-            </a>
+            </Link>
         ));
 
         return (
