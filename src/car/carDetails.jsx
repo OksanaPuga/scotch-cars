@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 class CarDetails extends Component {
     constructor(props) {
@@ -9,6 +10,13 @@ class CarDetails extends Component {
         const cars = this.props.data;
         const id = this.props.match.params.id;
         const car = cars.filter(car => car.id == id)[0];
+        const RedirectBtn = props => (
+            <button
+                className='btn btn-default'
+                onClick={() => props.history.push('/car')}>
+                To Cars
+            </button>
+        );
         
         return car ? (
             <div>
@@ -28,6 +36,10 @@ class CarDetails extends Component {
                             <li><strong>Year:</strong> {car.year}</li>
                             <li><strong>Price:</strong> {car.price}</li>
                         </ul>
+                    </div>
+
+                    <div className='col-sm-12'>
+                        <Route render={(props) => (<RedirectBtn {...props} />)} />
                     </div>
                 </div>
             </div>
